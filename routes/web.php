@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\{ProductController, CartController};
 
-Route::get('/test', [TestController::class,'index'])->name('test');
+Route::get('/products', [ProductController::class,'index'])->name('products');
+Route::get('/product/{slug}', [ProductController::class,'detail'])->name('product.detail');
+
+Route::post('/cart', [CartController::class,'store'])->name('cart.store');
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
