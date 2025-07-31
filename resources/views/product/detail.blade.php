@@ -10,7 +10,7 @@
                 <form class="flex flex-col" action="{{route('cart.store')}}" method="POST">
                     @csrf
                     <input type="number" min="0" name="qty" class="border border-black border-solid" >
-                    <input type="hidden" name="product" value="{{encrypt($product->id)}}">
+                    <input type="hidden" name="product" value="{{Crypt::encryptString($product->id)}}">
                     <input type="submit" class="bg-indigo-600 hover:bg-indigo-700 mt-2 py-1 rounded text-white buy-btn" value="Add to cart">
                 </form>
             </div>

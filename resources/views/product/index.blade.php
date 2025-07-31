@@ -10,7 +10,7 @@
                     <h2 class="font-semibold text-gray-800 text-sm"><a href="{{route('product.detail',$product->slug)}}">{{ $product->name }}</a></h2>
                     <p class="font-bold text-indigo-600 text-md">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
                     <span class="font-light text-gray-300 text-xs">Stock : {{$product->stock}}</span>
-                    <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 mt-2 py-1 rounded w-full text-white buy-btn"
+                    <button onclick="openModal('{{Crypt::encryptString($product->id)}}')" class="bg-indigo-600 hover:bg-indigo-700 mt-2 py-1 rounded w-full text-white buy-btn"
                             >
                         Add to Cart
                     </button>
@@ -27,13 +27,13 @@
     <div class="relative bg-white shadow-xl p-6 rounded-lg w-full max-w-md">
         <h2 class="mb-4 font-bold text-xl">Add to cart</h2>
         <div class="w-full fl">
-            <div class="flex flex-col">
+            <form action="{{route('cart.store')}}" method="POST" class="flex flex-col" id="cart_modal">
+                 @csrf
                     <input type="number" name="qty" class="border border-black border-solid" >
-                    <button class="bg-indigo-600 hover:bg-indigo-700 mt-2 py-1 rounded text-white buy-btn"
+                    <input type="hidden" name="product">
+                    <input type="submit" class="bg-indigo-600 hover:bg-indigo-700 mt-2 py-1 rounded text-white buy-btn"
                                 >
-                            Add to Cart
-                        </button>
-                </div>
+                    </form>
         </div>
 
         <!-- Action Buttons -->
@@ -54,13 +54,20 @@
 
 @section('footer')
 <script>
-    function openModal() {
+    function openModal(productId) {
+        // console.log(productId);
+        const form = $('#cart_modal')
+
+        form.find('input[name="product"]').val(productId);
+
         document.getElementById('myModal').classList.remove('hidden');
+
     }
 
     function closeModal() {
         document.getElementById('myModal').classList.add('hidden');
     }
+
 </script>
 
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\{Crypt};
 
 use App\Models\{Product,Cart};
 class CartController extends Controller implements HasMiddleware
@@ -25,7 +26,7 @@ class CartController extends Controller implements HasMiddleware
         ]);
 
         try {
-            $id = Crypt::decrypt($request->product);
+            $id = Crypt::decryptString($request->product);
         } catch (\Throwable $th) {
             return redirect()->back()->with('error','invalid product');
         }
@@ -48,6 +49,8 @@ class CartController extends Controller implements HasMiddleware
                 'product_id' => $product->id,
                 'quantity' => $request->qty,
             ]);
+
+            return redirect()->back()->with('success','Success menambahkan ke keranjang');
         }
 
         $cart->quantity = $request->qty;

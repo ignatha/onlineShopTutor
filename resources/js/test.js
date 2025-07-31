@@ -1,4 +1,4 @@
-import toastr from 'toastr'
+import toastr from "toastr"
 
 const defaultToast = () => {
 
@@ -23,5 +23,6 @@ const defaultToast = () => {
     return toastr
 
 }
+
 
 window.toastr = defaultToast()

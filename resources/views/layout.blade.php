@@ -23,7 +23,7 @@
                         <circle cx="20" cy="21" r="1" />
                     </svg>
                     <span id="cart-count"
-                        class="-top-2 -right-2 absolute flex justify-center items-center bg-red-500 rounded-full w-5 h-5 text-white text-xs">0</span>
+                        class="-top-2 -right-2 absolute flex justify-center items-center bg-red-500 rounded-full w-5 h-5 text-white text-xs">{{$cart}}</span>
                 </button>
             </div>
         @endauth
@@ -37,7 +37,7 @@
         @yield('content')
     </main>
 
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/test.js'])
 
     <script>
         $(document).ready(function(){
