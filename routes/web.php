@@ -9,6 +9,16 @@ Route::get('/product/{slug}', [ProductController::class,'detail'])->name('produc
 
 Route::post('/cart', [CartController::class,'store'])->name('cart.store');
 
+Route::get('/test', function () {
+
+    return Inertia::render('Test',['kelas' => 'ini kelas']);
+})->name('test');
+
+Route::get('/halaman', function () {
+
+    return Inertia::render('Halaman');
+})->name('halaman');
+
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
